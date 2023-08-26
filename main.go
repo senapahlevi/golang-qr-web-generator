@@ -4,6 +4,7 @@ import (
 	"log"
 	"qrweb/customer"
 	"qrweb/databases"
+	"qrweb/login"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +14,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	login.SetDatabaseLogin(db)
+	register.SetDatabaseLogin(db)
 
 	customer.SetDatabase(db)
 	router := gin.Default()
@@ -20,6 +23,7 @@ func main() {
 	api.GET("/customers", customer.GetCustomer)
 	api.POST("/create-customer", customer.CreateCustomer)
 	api.GET("/customer/:id", customer.GetCustomerID)
+	api.PUT("/customer/:id", customer.UpdateDataCustomer)
 	api.PUT("/customer/:id", customer.UpdateDataCustomer)
 
 	router.Run(":8080")
