@@ -12,8 +12,10 @@ package main
 
 // 	// Vocale("senapahle")
 // 	// JsonInput("budi tono 21")
-// 	FixingCapital("terimakasih")
+// 	// FixingCapital("terimakasih")
 // 	// capitalizeWords("terimakasih")
+// 	SunlightTree([]int{1, 2, 8, 6, 7, 9})
+// 	sunlitTrees([]int{1, 2, 8, 6, 7, 20, 9})
 // }
 
 // type Manager struct {
@@ -83,17 +85,16 @@ package main
 // 	return s
 // }
 
-// func FixingCapital(input string) {
-// 	coba := strings.Split(input, " ")
-// 	// fmt.Println("hello", coba)
-// 	// hasile := strings.ToUpper(coba[0])
-// 	for _, word := range coba {
-// 		first := strings.ToUpper(string(word[0])) + strings.ToLower(word[1:6])
-// 		last := strings.ToUpper(string(word[1]))
-// 		fmt.Println("hasile", result)
-// 	}
+// // func FixingCapital(input string) {
+// // 	coba := strings.Split(input, " ")
 
-// }
+// // 	for _, word := range coba {
+// // 		first := strings.ToUpper(string(word[0])) + strings.ToLower(word[1:6])
+// // 		last := strings.ToUpper(string(word[1]))
+// // 		fmt.Println("hasile", result)
+// // 	}
+
+// // }
 
 // func capitalizeWords(s string) string {
 // 	// Variabel untuk menyimpan hasil output
@@ -114,4 +115,51 @@ package main
 // 	// Mengembalikan variabel result sebagai nilai balik fungsi
 // 	fmt.Println("heyy result", result)
 // 	return result
+// }
+
+// func SunlightTree(input []int) {
+// 	sum := 0
+// 	hasil := []int{}
+// 	max := 0
+
+// 	for i := 0; i < len(input)-1; i++ {
+// 		// if i == 0 {
+// 		// 	sum += 1
+// 		// }
+// 		if input[i] < input[i+1] {
+// 			// max = input[i+1]
+// 			hasil = append(hasil, input[i+1])
+// 		}
+
+// 	}
+// 	// 1, 2, 8, 6, 7, 9
+// 	fmt.Println(sum, "sum")
+// 	fmt.Println(hasil, "hasil")
+// 	fmt.Println(max, "max")
+// }
+
+// func sunlitTrees(meter []int) []int {
+// 	// Variabel untuk menyimpan tinggi maksimum pohon yang terkena sinar matahari
+// 	var max int
+
+// 	// Variabel untuk menyimpan indeks-indeks pohon yang terkena sinar matahari
+// 	var result []int
+
+// 	// Loop for sepanjang panjang array meter
+// 	for i, m := range meter {
+// 		// Memeriksa apakah tinggi pohon lebih besar dari variabel max atau tidak
+// 		fmt.Println(i, "jello i", m, " hello m")
+// 		fmt.Println("hoy max", max)
+// 		if m > max {
+// 			// Menambahkan indeks pohon ke variabel result
+// 			result = append(result, m)
+// 			// Mengubah nilai variabel max menjadi tinggi pohon
+// 			max = m
+// 		}
+// 	}
+
+// 	// Mengembalikan variabel result sebagai nilai balik fungsi
+// 	fmt.Println("finale", result)
+// 	return result
+
 // }
