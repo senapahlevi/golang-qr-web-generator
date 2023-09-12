@@ -18,9 +18,9 @@ func SetDatabase(database *databases.DB) {
 func GetCustomer(c *gin.Context) {
 	customer := []models.Customer{}
 
-	err := db.Limit(5).Find(&customer)
+	err := db.Find(&customer).Error
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 	c.JSON(http.StatusOK, customer)
 	return

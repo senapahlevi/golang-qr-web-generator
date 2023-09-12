@@ -1,13 +1,8 @@
-package m_test
+package cobaa
 
-// import (
-// 	"fmt"
-// 	"strings"
-// )
+//The quick brown fox jumps over the lazy dog.
 
-// //The quick brown fox jumps over the lazy dog.
-
-// func coba() {
+// func main() {
 // 	// text := "darwin city"
 // 	// arr := []string{text}
 // 	// arrs := arr[0]

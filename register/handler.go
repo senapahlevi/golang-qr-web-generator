@@ -28,7 +28,7 @@ func SetDatabaseRegister(databases *databases.DB) {
 	db = databases.DB
 }
 
-func RegisterUser(c *gin.Context) {
+func RegisterCustomer(c *gin.Context) {
 	var register RegisterRequest
 
 	if err := c.ShouldBindJSON(&register); err != nil {

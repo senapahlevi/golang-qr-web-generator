@@ -20,7 +20,7 @@ func SetDatabaseLogin(database *databases.DB) {
 	db = database.DB
 }
 
-func LoginUser(c *gin.Context) {
+func LoginCustomer(c *gin.Context) {
 	var request LoginRequest
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Error": err.Error()})
@@ -64,4 +64,36 @@ func generateToken(CustomerID int) (string, error) {
 		return "", err
 	}
 	return signedToken, err
+}
+
+func LoginGoogleCustomer(c *gin.Context) {
+	var request LoginRequest
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"Error": err.Error()})
+		return
+	}
+	var customer models.Customer
+	if err := db.Where("username = ?", request.Username).First(&customer); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":  "Invalid username or password",
+			"status": "Denied",
+		})
+		return
+	}
+	if err := bcrypt.CompareHashAndPassword([]byte(customer.Password), []byte(request.Password)); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":  "Invalid username or password",
+			"status": "Denied",
+		})
+		return
+	}
+	token, err := generateToken(customer.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"token":  token,
+		"status": "success",
+	})
 }

@@ -49,7 +49,7 @@ func SetDB() (*DB, error) {
 		log.Fatal(err)
 		return nil, err
 	}
-	err = db.AutoMigrate(&models.Customer{}, &models.RolesUser{})
+	err = db.AutoMigrate(&models.Customer{}, &models.RolesUser{}, &models.QRcode{})
 	return &DB{
 		DB: db,
 	}, nil
