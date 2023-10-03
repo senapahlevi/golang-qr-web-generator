@@ -37,13 +37,14 @@ func RegisterCustomer(c *gin.Context) {
 	}
 	//check email
 	var existEmail models.Customer
-	if err := db.Where("email = ?", register.Email).First(&existEmail).Error; err != nil {
+	if err := db.Where("email = ?", register.Email).First(&existEmail).Error; err == nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "email already taken ", "status": "denied"})
 		return
 	}
+
 	//check username
 	var existUsername models.Customer
-	if err := db.Where("username = ?", register.Username).First(&existUsername).Error; err != nil {
+	if err := db.Where("username = ?", register.Username).First(&existUsername).Error; err == nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "username already taken ", "status": "denied"})
 		return
 	}

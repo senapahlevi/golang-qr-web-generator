@@ -6,6 +6,7 @@ import (
 	"qrweb/databases"
 	"qrweb/generateqr"
 	"qrweb/login"
+	"qrweb/middleware"
 
 	"qrweb/register"
 
@@ -54,10 +55,11 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	api.GET("/customers", customer.GetCustomer)
+	// api.GET("/customers", customer.GetCustomer)
 	api.POST("/create-customer", customer.CreateCustomer)
 	api.GET("/customer/:id", customer.GetCustomerID)
 	api.PUT("/customer/:id", customer.UpdateDataCustomer)
+	api.GET("/customers", middleware.AuthMiddleware(), customer.GetCustomer)
 
 	//genereate qr code
 	api.POST("/qr-generate", generateqr.GenerateQRCode)
@@ -66,6 +68,7 @@ func main() {
 	api.POST("/login", login.LoginCustomer)
 	api.POST("/login-google", login.LoginCustomer)
 	api.POST("/register", register.RegisterCustomer)
+	// api.POST("/register", register.RegisterCustomer)
 
 	router.Run(":8080")
 

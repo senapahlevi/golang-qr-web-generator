@@ -22,27 +22,13 @@ func SetDatabaseRegister(databases *databases.DB) {
 }
 func GenerateQRCode(c *gin.Context) {
 
-	// text := c.PostForm("text")
-	// link := c.PostForm("link")
-	// qrcodeImage, err := qrcode.Encode(text, qrcode.Medium, 256)
-	// if err != nil {
-	// 	c.JSON(http.StatusInternalServerError, err)
-	// 	return
-	// }
-
-	// qrcodes := models.QRcode{
-	// 	Text:      text,
-	// 	TextURL:   link,
-	// 	CreatedAt: time.Now(),
-	// 	UpdatedAt: time.Now(),
-	// }
-
 	var data models.QRcode
 	if err := c.ShouldBindJSON(&data); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	qrcodeImage, err := qrcode.Encode(data.Text, qrcode.Medium, 256)
+	// qrcodeImage, err := qrcode.Encode(data.Text, qrcode.Medium, 256)
+	qrcodeImage, err := qrcode.Encode("tel:"+data.Text, qrcode.Medium, 256)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 		return

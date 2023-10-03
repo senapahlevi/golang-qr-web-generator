@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"qrweb/databases"
+	"qrweb/middleware"
 	"qrweb/models"
 
 	"github.com/gin-gonic/gin"
@@ -16,6 +17,11 @@ func SetDatabase(database *databases.DB) {
 	db = database.DB
 }
 func GetCustomer(c *gin.Context) {
+	claims := middleware.Authentication(c)
+	if claims == nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "unauthorized"})
+		return
+	}
 	customer := []models.Customer{}
 
 	err := db.Find(&customer).Error
